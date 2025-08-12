@@ -3,12 +3,10 @@ function cifraDeCesar(palavra, deslocamento) {
                     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     let resultado = '';
     
-    // Passo por cada letra da palavra
     for (let i = 0; i < palavra.length; i++) {
       let letra = palavra[i];
       let indiceLetra = -1;
       
-      // Procurar o índice da letra no alfabeto
       for (let j = 0; j < alfabeto.length; j++) {
         if (alfabeto[j] === letra) {
           indiceLetra = j;
@@ -16,29 +14,66 @@ function cifraDeCesar(palavra, deslocamento) {
         }
       }
       
-      // Calcular o novo índice com deslocamento
       let novoIndice = indiceLetra + deslocamento;
       if (novoIndice >= alfabeto.length) {
-        novoIndice = novoIndice - alfabeto.length; // volta para o começo
+        novoIndice = novoIndice - alfabeto.length;
       }
-      
-      // Adicionar letra cifrada no resultado
       resultado = resultado + alfabeto[novoIndice];
     }
     
     return resultado;
   }
   
-  // Exemplo de uso
-  console.log(cifraDeCesar('hello world', 3));  // saída: 'def'
+  let cifrado = cifraDeCesar('hello world', 3); 
+  console.log(cifraDeCesar('hello world', 3)); 
   
-
-  function duplicatas(lista){
-    let duplicatas = []
-
-    for (let i = 0; i < lista.length; i++)
-        if(!lista.includes(duplicatas[i])){
-            duplicatas += duplicatas[i] 
+  function duplicatas(texto){
+    let resultado = ''
+    for (let i = 0; i < texto.length; i++){
+        if(!resultado.includes(texto[i])){
+            resultado += texto[i]; 
         }
-
   }
+  return resultado
+}
+console.log(`seu texto sem duplicatas é: ${duplicatas(cifrado)}`)
+
+
+function vogais(texto){
+  const vogais = 'aeiouAEIOU'
+  let resultado = 0
+  let contador = {a:0, e:0, i:0, o:0, u:0 }
+  let letra = texto.toLowerCase()
+
+  for(let j = 0; j < letra.length; j++){
+    if(vogais.includes(letra[j])){
+      
+      switch (letra[j]){
+        case 'a':
+          contador.a++
+          break
+        case 'e':
+          contador.e++
+          break
+        case 'i':
+          contador.i++
+          break
+        case 'o':
+          contador.o++
+          break
+        case 'u':
+          contador.u++
+          break
+        default:
+        break
+      }
+      resultado ++;
+      }
+  }
+  return [resultado,contador]
+}
+
+let result = vogais(duplicatas(cifrado))
+
+console.log(`vogais: ${result[0]}`)
+console.log(`cada volgal tem: a:${result[1].a} e:${result[1].e} i:${result[1].i} o:${result[1].o} u:${result[1].u}`)
